@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const StyledAppNavLink = styled.a`
+const StyledAppNavLink = styled(NavLink)`
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -25,7 +26,7 @@ interface AppNavLinkProps {
 
 export default function AppNavLink({ children, icon, href }: AppNavLinkProps) {
   return (
-    <StyledAppNavLink href={href}>
+    <StyledAppNavLink to={href}>
       <FontAwesomeIcon icon={icon} />
       <LinkText>{children}</LinkText>
     </StyledAppNavLink>

@@ -27,18 +27,18 @@ export default function AppNav() {
   return (
     <StyledNav>
       <NavLinkContainer>
-        <AppNavLink icon={faHouse} href={'#'}>
+        <AppNavLink icon={faHouse} href={'home'}>
           Home
         </AppNavLink>
-        <AppNavLink icon={faLandmark} href={'#'}>
+        <AppNavLink icon={faLandmark} href={'accounts'}>
           Accounts
         </AppNavLink>
-        <AppNavLink icon={faChartLine} href={'#'}>
+        <AppNavLink icon={faChartLine} href={'stocks'}>
           Stocks
         </AppNavLink>
       </NavLinkContainer>
       <NavLinkContainer>
-        <AppNavLink icon={faUser} href={'#'}>
+        <AppNavLink icon={faUser} href={'user'}>
           User
         </AppNavLink>
       </NavLinkContainer>
