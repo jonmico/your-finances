@@ -10,8 +10,10 @@ const StyledAppNavLink = styled.a`
 `;
 
 const LinkText = styled.div`
-  @media (max-width: 1000px) {
-    display: none;
+  display: none;
+
+  @media (min-width: 1000px) {
+    display: contents;
   }
 `;
 

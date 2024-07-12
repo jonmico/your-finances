@@ -4,20 +4,17 @@ import AppNav from './components/app-nav';
 
 const StyledApp = styled.div`
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: min-content 1fr;
   grid-template-rows: min-content 1fr;
   height: 100vh;
+  min-width: 650px;
+
+  @media (min-width: 1000px) {
+    grid-template-columns: 20% 1fr;
+  }
 
   @media (min-width: 1600px) {
     grid-template-columns: 320px 1fr;
-  }
-
-  @media (max-width: 1200px) {
-    grid-template-columns: 240px 1fr;
-  }
-
-  @media (max-width: 1000px) {
-    grid-template-columns: min-content 1fr;
   }
 `;
 
