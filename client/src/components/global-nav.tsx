@@ -5,6 +5,8 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--text-800);
+  padding: 0.5rem 1rem;
 `;
 
 const LinkContainer = styled.div`
@@ -18,9 +20,9 @@ export default function GlobalNav() {
     <StyledNav>
       <h1>YourFinances</h1>
       <LinkContainer>
-        <h1>Test</h1>
-        <h1>Test</h1>
-        <h1>Test</h1>
+        <a href={'#'}>Register</a>
+        <a href={'#'}>Login</a>
+        <a href={'#'}>Logout</a>
       </LinkContainer>
     </StyledNav>
   );
