@@ -4,7 +4,6 @@ const StyledNav = styled.nav`
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  padding: 1rem;
   grid-column: 1 / 3;
   justify-content: space-between;
 `;

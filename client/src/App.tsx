@@ -7,6 +7,8 @@ const StyledApp = styled.div`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: min-content 1fr;
   height: 100vh;
+  padding: 1rem;
+  gap: 1rem;
 `;
 
 export default function App() {
