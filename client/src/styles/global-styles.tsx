@@ -75,6 +75,8 @@ export const GlobalStyles = createGlobalStyle`
     --accent-800: #021964;
     --accent-900: #010c32;
     --accent-950: #000619;
+
+    font-family: 'Poppins', 'sans-serif'
   }
 
   body {
@@ -86,7 +88,7 @@ export const GlobalStyles = createGlobalStyle`
   button,
   textarea,
   select {
-    font: inherit;
+    font-family: inherit;
     color: inherit;
   }
 
