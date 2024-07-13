@@ -16,6 +16,15 @@ import User from './pages/user';
 import Register from './pages/register';
 import Login from './pages/login';
 
+const PageContent = styled.div`
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+`;
+
 const StyledApp = styled.div`
   display: grid;
   grid-template-columns: min-content 1fr;
@@ -38,7 +47,31 @@ export default function App() {
       <BrowserRouter>
         <GlobalNav />
         <Routes>
-          <Route path={'/'} index element={<Index />} />
+          <Route
+            path={'/'}
+            index
+            element={
+              <PageContent>
+                <Index />
+              </PageContent>
+            }
+          />
+          <Route
+            path={'register'}
+            element={
+              <PageContent>
+                <Register />
+              </PageContent>
+            }
+          />
+          <Route
+            path={'login'}
+            element={
+              <PageContent>
+                <Login />
+              </PageContent>
+            }
+          />
           <Route path={'app'} element={<AppLayout />}>
             <Route index element={<Navigate replace to={'home'} />} />
             <Route path={'home'} element={<Home />} />
@@ -46,8 +79,6 @@ export default function App() {
             <Route path={'stocks'} element={<Stocks />} />
             <Route path={'user'} element={<User />} />
           </Route>
-          <Route path={'register'} element={<Register />} />
-          <Route path={'login'} element={<Login />} />
         </Routes>
         <Outlet />
       </BrowserRouter>
