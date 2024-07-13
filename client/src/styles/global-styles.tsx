@@ -82,6 +82,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background-color: var(--background);
     color: var(--text);
+    line-height: 1.5;
   }
  
   input,
