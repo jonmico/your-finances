@@ -8,6 +8,22 @@ const StyledAppNavLink = styled(NavLink)`
   display: flex;
   gap: 1rem;
   align-items: center;
+  transition: color 250ms ease-in-out, border-bottom 350ms ease-in-out;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid transparent;
+
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
+
+  &:hover {
+    color: var(--accent-200);
+    border-bottom: 1px solid var(--accent-200);
+  }
+  &.active {
+    color: var(--accent-400);
+    border-bottom: 1px solid var(--accent-400);
+  }
 `;
 
 const LinkText = styled.div`
