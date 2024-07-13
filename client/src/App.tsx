@@ -13,6 +13,8 @@ import Home from './pages/home';
 import Accounts from './pages/accounts';
 import Stocks from './pages/stocks';
 import User from './pages/user';
+import Register from './pages/register';
+import Login from './pages/login';
 
 const StyledApp = styled.div`
   display: grid;
@@ -44,6 +46,8 @@ export default function App() {
             <Route path={'stocks'} element={<Stocks />} />
             <Route path={'user'} element={<User />} />
           </Route>
+          <Route path={'register'} element={<Register />} />
+          <Route path={'login'} element={<Login />} />
         </Routes>
         <Outlet />
       </BrowserRouter>

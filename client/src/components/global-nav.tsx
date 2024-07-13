@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNav = styled.nav`
@@ -20,9 +21,10 @@ export default function GlobalNav() {
     <StyledNav>
       <h1>YourFinances</h1>
       <LinkContainer>
-        <a href={'#'}>Register</a>
-        <a href={'#'}>Login</a>
-        <a href={'#'}>Logout</a>
+        <NavLink to={'app'}>App</NavLink>
+        <NavLink to={'register'}>Register</NavLink>
+        <NavLink to={'login'}>Login</NavLink>
+        <NavLink to={'logout'}>Logout</NavLink>
       </LinkContainer>
     </StyledNav>
   );
