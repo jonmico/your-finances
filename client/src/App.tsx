@@ -11,10 +11,11 @@ import GlobalNav from './components/global-nav';
 import Index from './pages';
 import Home from './pages/home';
 import Accounts from './pages/accounts';
-import Stocks from './pages/stocks';
 import User from './pages/user';
 import Register from './pages/register';
 import Login from './pages/login';
+import Budgets from './pages/budgets';
+import Transactions from './pages/transactions';
 
 const PageContent = styled.div`
   grid-column: 1/-1;
@@ -76,7 +77,8 @@ export default function App() {
             <Route index element={<Navigate replace to={'home'} />} />
             <Route path={'home'} element={<Home />} />
             <Route path={'accounts'} element={<Accounts />} />
-            <Route path={'stocks'} element={<Stocks />} />
+            <Route path={'budgets'} element={<Budgets />} />
+            <Route path={'transactions'} element={<Transactions />} />
             <Route path={'user'} element={<User />} />
           </Route>
         </Routes>
