@@ -2,17 +2,22 @@ import express, { ErrorRequestHandler } from 'express';
 import 'dotenv/config';
 import { connectDB } from './db';
 import { router as userRouter } from './routes/user';
+import { router as accountRouter } from './routes/account';
 import cors from 'cors';
 
 const PORT = process.env.PORT;
 
 const app = express();
 
+// Server config
 app.use(cors());
 app.use(express.json());
 
+// Routers
 app.use('/api/user', userRouter);
+app.use('/api/account', accountRouter);
 
+// Database connection
 connectDB();
 
 // 404 Error handler
