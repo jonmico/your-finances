@@ -7,10 +7,24 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 
     const user = await User.create({ firstName, lastName, email });
 
-    return res.json({ user });
+    res.json({ user });
   } catch (err) {
     // Placeholder error handler
     res.json({ error: `Something went wrong: ${err}` });
+    next(err);
+  }
+}
+
+export async function getUsers(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const users = await User.find();
+
+    res.json({ users });
+  } catch (err) {
     next(err);
   }
 }
