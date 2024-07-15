@@ -1,8 +1,9 @@
 import {
   faHouse,
-  faChartLine,
+  faScaleUnbalanced,
   faLandmark,
   faUser,
+  faHandHoldingDollar,
 } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import AppNavLink from './app-nav-link';
@@ -33,8 +34,11 @@ export default function AppNav() {
         <AppNavLink icon={faLandmark} href={'accounts'}>
           Accounts
         </AppNavLink>
-        <AppNavLink icon={faChartLine} href={'stocks'}>
-          Stocks
+        <AppNavLink icon={faScaleUnbalanced} href={'budgets'}>
+          Budgets
+        </AppNavLink>
+        <AppNavLink icon={faHandHoldingDollar} href={'transactions'}>
+          Transactions
         </AppNavLink>
       </NavLinkContainer>
       <NavLinkContainer>
