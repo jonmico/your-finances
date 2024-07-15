@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { ErrorRequestHandler } from 'express';
 import 'dotenv/config';
 import { connectDB } from './db';
 import { router as userRouter } from './routes/user';
@@ -18,9 +18,16 @@ connectDB();
 // 404 Error handler
 app.use((req, res) => {
   res.status(404).json({
-    errorMessage: 'Sorry, but we cannot find what you are looking for!',
+    errorMessage: 'Not found: 404 error.',
   });
 });
+
+// Catch-all error handler
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use(((err: Error, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: err });
+}) as ErrorRequestHandler);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}!`);
