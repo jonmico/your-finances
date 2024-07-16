@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { connectDB } from './db';
 import { router as userRouter } from './routes/user';
 import { router as accountRouter } from './routes/account';
+import { router as transactionRouter } from './routes/transaction';
 import cors from 'cors';
 
 const PORT = process.env.PORT;
@@ -16,6 +17,7 @@ app.use(express.json());
 // Routers
 app.use('/api/user', userRouter);
 app.use('/api/account', accountRouter);
+app.use('/api/transaction', transactionRouter);
 
 // Database connection
 connectDB();
