@@ -4,6 +4,7 @@ import { connectDB } from './db';
 import { router as userRouter } from './routes/user';
 import { router as accountRouter } from './routes/account';
 import { router as transactionRouter } from './routes/transaction';
+import { router as budgetRouter } from './routes/budget';
 import cors from 'cors';
 
 const PORT = process.env.PORT;
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/transaction', transactionRouter);
+app.use('/api/budget', budgetRouter);
 
 // Database connection
 connectDB();

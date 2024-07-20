@@ -18,14 +18,14 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const { name, amount, ownerId, accountId, budgetId }: ICreateBody =
       req.body;
 
-    const user = await User.findById(ownerId);
+    const user = await User.findById(ownerId).exec();
 
     if (!user) {
       res.status(400).json({ error: 'User not found.' });
       return;
     }
 
-    const account = await Account.findById(accountId);
+    const account = await Account.findById(accountId).exec();
 
     if (!account) {
       res.status(400).json({ error: 'Account not found.' });

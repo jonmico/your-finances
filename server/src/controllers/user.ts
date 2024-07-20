@@ -21,7 +21,7 @@ export async function getUsers(
   next: NextFunction
 ) {
   try {
-    const users = await User.find();
+    const users = await User.find().exec();
 
     res.json({ users });
   } catch (err) {
