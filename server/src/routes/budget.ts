@@ -4,4 +4,4 @@ import { create, getBudget } from '../controllers/budget';
 export const router = Router();
 
 router.post('/', create);
-router.get('/:ownerId/:budgetId', getBudget);
+router.get('/:budgetId', getBudget);

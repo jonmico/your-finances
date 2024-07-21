@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { Budget } from '../models/budget';
-import { User } from '../models/user';
+import { AppError } from '../app-error';
 
 interface ICreateBody {
   name: string;
@@ -16,8 +16,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const budget = await Budget.create({ name, ownerId, amount });
 
     if (!budget) {
-      res.status(400).json({ error: 'Error creating budget.' });
-      return;
+      throw new AppError('Error creating budget.', 400);
     }
 
     res.status(201).json({ budget });
@@ -32,30 +31,13 @@ export async function getBudget(
   next: NextFunction
 ) {
   try {
-    const { ownerId, budgetId } = req.params;
-
-    const user = await User.findById(ownerId).exec();
-
-    if (!user) {
-      res.status(400).json({ error: 'No user found.' });
-      return;
-    }
+    const { budgetId } = req.params;
 
     const budget = await Budget.findById(budgetId).exec();
 
     if (!budget) {
-      res.status(400).json({ error: 'No budget found.' });
-      return;
+      throw new AppError('No budget found.', 400);
     }
-
-    // FIXME: Why doesn't this check work?
-
-    // if (budget.ownerId !== user._id) {
-    //   console.log(budget.ownerId);
-    //   console.log(user._id);
-    //   res.status(403).json({ error: 'Forbidden.' });
-    //   return;
-    // }
 
     res.json({ budget });
   } catch (err) {
