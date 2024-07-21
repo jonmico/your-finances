@@ -9,10 +9,10 @@ interface ICreateBody {
   amount: number;
   ownerId: mongoose.Types.ObjectId;
   accountData: {
-  accountId: mongoose.Types.ObjectId;
+    accountId: mongoose.Types.ObjectId;
   };
   budgetData?: {
-  budgetId?: mongoose.Types.ObjectId;
+    budgetId?: mongoose.Types.ObjectId;
     budgetName: string;
   };
 }
@@ -72,6 +72,27 @@ export async function getTransactionById(
     }
 
     res.json({ transaction });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getTransactionsByUserId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { userId } = req.params;
+
+    const transactions = await Transaction.find({ ownerId: userId }).exec();
+
+    if (!transactions) {
+      console.error(transactions);
+      throw new AppError('No transactions found.', 400);
+    }
+
+    res.json({ transactions });
   } catch (err) {
     next(err);
   }
