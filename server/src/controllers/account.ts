@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { Account } from '../models/account';
 import { User } from '../models/user';
+import { AppError } from '../app-error';
 
 interface ICreateBody {
   name: string;
@@ -16,12 +17,32 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const user = await User.findById(ownerId);
 
     if (!user) {
-      res.status(400).json({ error: 'Invalid userId.' });
+      throw new AppError('Invalid userId.', 400);
     }
 
     const account = await Account.create({ name, ownerId, balance });
 
     res.status(201).json(account);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getAccountById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { accountId } = req.params;
+
+    const account = await Account.findById(accountId).exec();
+
+    if (!account) {
+      throw new AppError('Account not found.', 400);
+    }
+
+    res.json({ account });
   } catch (err) {
     next(err);
   }
