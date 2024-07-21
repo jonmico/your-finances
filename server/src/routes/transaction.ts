@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { create } from '../controllers/transaction';
+import { create, getTransactionById } from '../controllers/transaction';
 
 export const router = Router();
 
 router.post('/', create);
+router.get('/:transactionId', getTransactionById);
