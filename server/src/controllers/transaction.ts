@@ -12,7 +12,7 @@ interface ICreateBody {
     accountId: mongoose.Types.ObjectId;
   };
   budgetData?: {
-    budgetId?: mongoose.Types.ObjectId;
+    budgetId: mongoose.Types.ObjectId;
     budgetName: string;
   };
 }
