@@ -6,6 +6,7 @@ import { router as accountRouter } from './routes/account';
 import { router as transactionRouter } from './routes/transaction';
 import { router as budgetRouter } from './routes/budget';
 import cors from 'cors';
+import { AppError } from './app-error';
 
 const PORT = process.env.PORT;
 
@@ -33,9 +34,12 @@ app.use((req, res) => {
 
 // Catch-all error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use(((err: Error, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: err });
+app.use(((err: Error | AppError, req, res, next) => {
+  console.error({ message: err.message, stack: err.stack });
+
+  const errStatus = err instanceof AppError ? err.statusCode : 500;
+
+  res.status(errStatus).json({ error: err.message });
 }) as ErrorRequestHandler);
 
 app.listen(PORT, () => {
