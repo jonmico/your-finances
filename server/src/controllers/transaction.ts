@@ -5,19 +5,29 @@ import { Transaction } from '../models/transaction';
 import { AppError } from '../app-error';
 
 interface ICreateBody {
-  name: string;
+  transactionName: string;
   amount: number;
   ownerId: mongoose.Types.ObjectId;
+  accountData: {
   accountId: mongoose.Types.ObjectId;
+  };
+  budgetData?: {
   budgetId?: mongoose.Types.ObjectId;
+    budgetName: string;
+  };
 }
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const { name, amount, ownerId, accountId, budgetId }: ICreateBody =
-      req.body;
+    const {
+      transactionName,
+      amount,
+      ownerId,
+      accountData,
+      budgetData,
+    }: ICreateBody = req.body;
 
-    const account = await Account.findById(accountId).exec();
+    const account = await Account.findById(accountData.accountId).exec();
 
     if (!account) {
       throw new AppError('Account not found.', 400);
@@ -25,10 +35,16 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 
     const transaction = await Transaction.create({
       amount,
-      name,
+      transactionName,
       ownerId,
-      accountId,
-      budgetId,
+      accountData: {
+        accountId: account._id,
+        accountName: account.name,
+      },
+      budgetData: {
+        budgetId: budgetData?.budgetId,
+        budgetName: budgetData?.budgetName,
+      },
     });
 
     account.balance += transaction.amount;
