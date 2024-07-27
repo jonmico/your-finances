@@ -35,9 +35,9 @@ app.use((req, res) => {
 // Catch-all error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(((err: Error | AppError, req, res, next) => {
-  console.error({ message: err.message, stack: err.stack });
-
   const errStatus = err instanceof AppError ? err.statusCode : 500;
+
+  console.error({ code: errStatus, message: err.message, stack: err.stack });
 
   res.status(errStatus).json({ error: err.message });
 }) as ErrorRequestHandler);
