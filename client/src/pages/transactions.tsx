@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiGetTransactionsByUserId } from '../services/transaction-api';
-
-interface ITransaction {
-  _id: string;
-  amount: number;
-  transactionName: string;
-  ownerId: string;
-  accountData: { accountId: string; accountName: string };
-  budgetData?: { budgetId: string; budgetName: string };
-}
+import { Transaction } from '../types/transaction';
 
 export default function Transactions() {
   return (
@@ -20,7 +12,7 @@ export default function Transactions() {
 }
 
 function TransactionList() {
-  const [transactions, setTransactions] = useState<ITransaction[] | null>(null);
+  const [transactions, setTransactions] = useState<Transaction[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 

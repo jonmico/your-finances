@@ -1,25 +1,16 @@
-/*
-TODO: 
-  Make some type of reusable api call/custom hook for easier error handling
-  At a minimum, add actual error handling into this api call, fix typing, etc
-*/
-export async function apiGetTransactionsByUserId(userId: string): Promise<
-  | {
-      transactions: {
-        _id: string;
-        amount: number;
-        transactionName: string;
-        ownerId: string;
-        accountData: { accountId: string; accountName: string };
-        budgetData?: { budgetId: string; budgetName: string };
-      }[];
-    }
-  | undefined
-> {
+import { Transaction } from '../types/transaction';
+
+export async function apiGetTransactionsByUserId(
+  userId: string
+): Promise<{ transactions: Transaction[] } | undefined> {
   try {
     const res = await fetch(
       `http://localhost:3000/api/transaction/user/${userId}`
     );
+
+    if (!res.ok) {
+      throw new Error('Error fetching transactions.');
+    }
 
     const data = await res.json();
 
