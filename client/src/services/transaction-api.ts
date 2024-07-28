@@ -1,21 +1,13 @@
 import { Transaction } from '../types/transaction';
+import { handleFetch } from '../utils/handleFetch';
 
-export async function apiGetTransactionsByUserId(
-  userId: string
-): Promise<{ transactions: Transaction[] } | undefined> {
-  try {
-    const res = await fetch(
-      `http://localhost:3000/api/transaction/user/${userId}`
-    );
+export async function apiGetTransactionsByUserId(userId: string): Promise<{
+  data: { transactions: Transaction[] | undefined };
+  error: string | undefined;
+}> {
+  const { data, error } = await handleFetch(() =>
+    fetch(`http://localhost:3000/api/transaction/user/${userId}`)
+  );
 
-    if (!res.ok) {
-      throw new Error('Error fetching transactions.');
-    }
-
-    const data = await res.json();
-
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
+  return { data, error };
 }
