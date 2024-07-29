@@ -28,9 +28,16 @@ export async function apiCreateUser(
     user: User;
     userCreated: boolean;
   }>(() =>
-    fetch('http://localhost:3000/api/user/', {
+    fetch('http://localhost:3000/api/user', {
       method: 'POST',
-      body: JSON.stringify({ firstName, lastName, email }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+      }),
     })
   );
 

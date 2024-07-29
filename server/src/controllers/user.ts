@@ -6,7 +6,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const { firstName, lastName, email } = req.body;
 
-    const existingUser = await User.find({ email }).exec();
+    const existingUser = await User.findOne({ email }).exec();
 
     if (existingUser) {
       throw new AppError('User with that email already exists.', 400);
