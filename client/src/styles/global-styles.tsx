@@ -85,13 +85,13 @@ export const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
   }
  
-  input,
+  /* input,
   button,
   textarea,
   select {
     font-family: inherit;
     color: inherit;
-  }
+  } */
 
   a {
   color: inherit;
