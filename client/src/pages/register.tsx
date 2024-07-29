@@ -1,5 +1,68 @@
 import { useState } from 'react';
 import { apiCreateUser } from '../services/user-api';
+import styled from 'styled-components';
+
+const StyledRegisterPage = styled.div`
+  border: 1px solid var(--text-800);
+  background-color: var(--background-900);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 480px;
+`;
+
+const StyledH1 = styled.h1`
+  padding: 0 0.75rem 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--text-800);
+  width: 100%;
+  text-align: center;
+`;
+
+const RegisterForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
+
+const FormInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Label = styled.label`
+  font-weight: 500;
+  font-size: 0.85rem;
+`;
+
+const Input = styled.input`
+  background-color: var(--background-900);
+  border-radius: 0.25rem;
+  height: 1.85rem;
+  border: 1px solid var(--text-700);
+  color: var(--text);
+  padding: 0 0.5rem;
+
+  &:focus-visible {
+    outline: 4px solid var(--primary-400);
+  }
+`;
+
+const SubmitButton = styled.button`
+  background-color: var(--accent-600);
+  color: var(--text);
+  padding: 0.7rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.25rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+
+  &:hover {
+    background-color: var(--accent-500);
+  }
+`;
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -34,18 +97,18 @@ export default function Register() {
   }
 
   if (isLoading) {
-    return <div>Creating account...</div>;
+    return <div>Attemping to create account...</div>;
   }
 
   return (
-    <div>
-      <h1>This is the Register Page</h1>
+    <StyledRegisterPage>
       {error && <div>{error}</div>}
       {userCreated && <div>User Created!: {user?.email}</div>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='firstName'>First Name</label>
-          <input
+      <RegisterForm onSubmit={handleSubmit}>
+        <StyledH1>Join YourFinances</StyledH1>
+        <FormInputContainer>
+          <Label htmlFor='firstName'>First Name</Label>
+          <Input
             type='text'
             id={'firstName'}
             name={'firstName'}
@@ -53,10 +116,10 @@ export default function Register() {
             onChange={(evt) => setFirstName(evt.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor='lastName'>Last Name</label>
-          <input
+        </FormInputContainer>
+        <FormInputContainer>
+          <Label htmlFor='lastName'>Last Name</Label>
+          <Input
             type='text'
             id={'lastName'}
             name={'lastName'}
@@ -64,10 +127,10 @@ export default function Register() {
             onChange={(evt) => setLastName(evt.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input
+        </FormInputContainer>
+        <FormInputContainer>
+          <Label htmlFor='email'>Email</Label>
+          <Input
             type='email'
             id={'email'}
             name={'email'}
@@ -75,9 +138,9 @@ export default function Register() {
             onChange={(evt) => setEmail(evt.target.value)}
             required
           />
-        </div>
-        <button>Create account</button>
-      </form>
-    </div>
+        </FormInputContainer>
+        <SubmitButton>Create account</SubmitButton>
+      </RegisterForm>
+    </StyledRegisterPage>
   );
 }
