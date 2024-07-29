@@ -19,22 +19,26 @@ function TransactionList() {
   useEffect(() => {
     async function getTransactionsByUserId() {
       setIsLoading(true);
-      const data = await apiGetTransactionsByUserId('66968c5af99043de0e8d04a7');
+      const { data, error } = await apiGetTransactionsByUserId(
+        '66968c5af99043de0e8d04a7'
+      );
       setIsLoading(false);
 
-      if (!data) {
-        console.error("I don't even know what to type here.");
-        setError('AHHHH');
+      if (error) {
+        console.error('Error:', error);
+        setError(error);
         return;
       }
 
-      setTransactions(data.transactions);
+      if (data) {
+        setTransactions(data.transactions);
+      }
     }
     getTransactionsByUserId();
   }, []);
 
   if (isLoading) {
-    return 'Loading your transactions...';
+    return <div>Loading your transactions...</div>;
   }
 
   return (
