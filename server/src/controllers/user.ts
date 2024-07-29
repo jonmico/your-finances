@@ -14,7 +14,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 
     const user = await User.create({ firstName, lastName, email });
 
-    res.json({ user });
+    res.json({ user, userCreated: true });
   } catch (err) {
     next(err);
   }
