@@ -24,6 +24,8 @@ const NavLinkContainer = styled.div`
   flex-direction: column;
 `;
 
+// TODO: Make this snap down at mobile viewport.
+
 export default function AppNav() {
   return (
     <StyledNav>

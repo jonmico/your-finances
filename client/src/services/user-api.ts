@@ -45,3 +45,6 @@ export async function apiCreateUser(
 
   return { data, error };
 }
+
+// TODO: Implement
+export async function apiLogin(email: string, password: string) {}

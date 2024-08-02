@@ -16,6 +16,8 @@ const LinkContainer = styled.div`
   gap: 1rem;
 `;
 
+// TODO: Snap this into a little drawer at smaller viewports.
+
 export default function GlobalNav() {
   return (
     <StyledNav>
