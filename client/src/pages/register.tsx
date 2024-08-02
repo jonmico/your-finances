@@ -64,6 +64,14 @@ const SubmitButton = styled.button`
   }
 `;
 
+const Error = styled.div`
+  border: 1px solid #fd5c63;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  color: #fd5c63;
+`;
+
 export default function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -91,6 +99,7 @@ export default function Register() {
     }
 
     if (data) {
+      setError('');
       setUser(data.user);
       setUserCreated(data.userCreated);
     }
@@ -102,10 +111,10 @@ export default function Register() {
 
   return (
     <StyledRegisterPage>
-      {error && <div>{error}</div>}
       {userCreated && <div>User Created!: {user?.email}</div>}
       <RegisterForm onSubmit={handleSubmit}>
         <StyledH1>Join YourFinances</StyledH1>
+        {error && <Error>Error: {error}</Error>}
         <FormInputContainer>
           <Label htmlFor='firstName'>First Name</Label>
           <Input
