@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../models/user';
 import { AppError } from '../app-error';
+import bcrypt from 'bcrypt';
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     const existingUser = await User.findOne({ email }).exec();
 
@@ -12,9 +13,20 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       throw new AppError('User with that email already exists.', 400);
     }
 
-    const user = await User.create({ firstName, lastName, email });
+    bcrypt.hash(password, 15, async (err, hash) => {
+      if (err) {
+        throw new AppError(err.message, 400);
+      }
 
-    res.json({ user, userCreated: true });
+      const user = await User.create({
+        firstName,
+        lastName,
+        email,
+        password: hash,
+      });
+
+      res.json({ user, userCreated: true });
+    });
   } catch (err) {
     next(err);
   }

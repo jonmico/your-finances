@@ -19,7 +19,8 @@ export async function apiGetUserById(
 export async function apiCreateUser(
   firstName: string,
   lastName: string,
-  email: string
+  email: string,
+  password: string
 ): Promise<{
   data: { user: User; userCreated: boolean } | undefined;
   error: string | undefined;
@@ -37,6 +38,7 @@ export async function apiCreateUser(
         firstName,
         lastName,
         email,
+        password,
       }),
     })
   );

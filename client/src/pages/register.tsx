@@ -76,6 +76,7 @@ export default function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,12 +86,15 @@ export default function Register() {
     email: string;
   } | null>(null);
 
-  const [userCreated, setUserCreated] = useState(false);
-
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     setIsLoading(true);
-    const { data, error } = await apiCreateUser(firstName, lastName, email);
+    const { data, error } = await apiCreateUser(
+      firstName,
+      lastName,
+      email,
+      password
+    );
     setIsLoading(false);
 
     if (error) {
@@ -101,7 +105,6 @@ export default function Register() {
     if (data) {
       setError('');
       setUser(data.user);
-      setUserCreated(data.userCreated);
     }
   }
 
@@ -111,7 +114,6 @@ export default function Register() {
 
   return (
     <StyledRegisterPage>
-      {userCreated && <div>User Created!: {user?.email}</div>}
       <RegisterForm onSubmit={handleSubmit}>
         <StyledH1>Join YourFinances</StyledH1>
         {error && <Error>Error: {error}</Error>}
@@ -145,6 +147,17 @@ export default function Register() {
             name={'email'}
             value={email}
             onChange={(evt) => setEmail(evt.target.value)}
+            required
+          />
+        </FormInputContainer>
+        <FormInputContainer>
+          <Label htmlFor='password'>Password</Label>
+          <Input
+            type='password'
+            id={'password'}
+            name={'password'}
+            value={password}
+            onChange={(evt) => setPassword(evt.target.value)}
             required
           />
         </FormInputContainer>
