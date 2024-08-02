@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { apiCreateUser } from '../services/user-api';
-import { Form } from '../ui/form';
-import { FormHeader } from '../ui/form-header';
-import { Error } from '../ui/error';
-import { FormInputContainer } from '../ui/form-input-container';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 import { ButtonWithSpacing } from '../ui/button';
+import { Error } from '../ui/error';
+import { Form } from '../ui/form';
 import { FormContainer } from '../ui/form-container';
+import { FormHeader } from '../ui/form-header';
+import { FormInputContainer } from '../ui/form-input-container';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 
 export default function RegisterForm() {
   const [firstName, setFirstName] = useState('');

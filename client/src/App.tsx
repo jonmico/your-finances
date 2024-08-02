@@ -31,7 +31,11 @@ const StyledApp = styled.div`
   grid-template-columns: min-content 1fr;
   grid-template-rows: min-content 1fr;
   height: 100vh;
-  min-width: 650px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: none;
+    grid-template-rows: min-content 1fr min-content;
+  }
 
   @media (min-width: 1000px) {
     grid-template-columns: 20% 1fr;
