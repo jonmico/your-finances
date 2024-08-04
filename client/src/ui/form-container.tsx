@@ -5,5 +5,7 @@ export const FormContainer = styled.div`
   background-color: var(--background-900);
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 480px;
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
 `;
