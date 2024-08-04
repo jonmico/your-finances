@@ -89,7 +89,9 @@ function MobileDropdown() {
   return (
     <StyledMobileDropdown>
       <StyledFontAwesomeIcon icon={faBars} onClick={handleClick} />
-      {isDropdownOpen && <MobileDropdownLinks />}
+      {isDropdownOpen && (
+        <MobileDropdownLinks closeDropdown={() => setIsDropdownOpen(false)} />
+      )}
     </StyledMobileDropdown>
   );
 }
@@ -108,40 +110,65 @@ const StyledMobileDropDownLinks = styled.ul`
   gap: 0.5rem;
 `;
 
-const StyledListItem = styled.li`
-  padding: 0.1rem 0.6rem;
-  border-radius: 0.25rem;
-  transition: background-color 200ms ease-in-out;
-
-  &:hover {
-    background-color: var(--text-800);
-    cursor: pointer;
-  }
-`;
-
 const LinkList = styled.ul`
   border-bottom: 1px solid var(--text-800);
   padding-bottom: 0.5rem;
 `;
 
 const ButtonListItem = styled.li`
-  padding: 0.25rem 0;
+  padding: 0.3rem 0;
 `;
 
-function MobileDropdownLinks() {
+const StyledLink = styled(Link)`
+  display: block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+  transition: background-color 250ms ease-in-out;
+
+  &:hover {
+    background-color: var(--text-800);
+  }
+
+  &:active {
+    background-color: var(--background-800);
+  }
+`;
+
+interface MobileDropdownLinksProps {
+  closeDropdown: () => void;
+}
+
+// TODO: Add icons to StyledLink?
+
+function MobileDropdownLinks({ closeDropdown }: MobileDropdownLinksProps) {
   function handleLogoutClick() {
+    closeDropdown();
     console.log('NYI: Logout');
   }
 
   return (
     <StyledMobileDropDownLinks>
       <LinkList>
-        <StyledListItem>
-          <Link to={'login'}>Login</Link>
-        </StyledListItem>
-        <StyledListItem>App</StyledListItem>
-        <StyledListItem>Register</StyledListItem>
-        <StyledListItem>User</StyledListItem>
+        <li>
+          <StyledLink to={'login'} onClick={closeDropdown}>
+            Login
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink to={'app'} onClick={closeDropdown}>
+            App
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink to={'register'} onClick={closeDropdown}>
+            Register
+          </StyledLink>
+        </li>
+        <li>
+          <StyledLink to={'app/user'} onClick={closeDropdown}>
+            User
+          </StyledLink>
+        </li>
       </LinkList>
       <ButtonListItem>
         <LogoutButton onClick={handleLogoutClick}>
