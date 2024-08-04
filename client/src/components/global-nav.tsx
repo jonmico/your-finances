@@ -2,6 +2,10 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { LogoutButton } from '../ui/button';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const StyledNav = styled.nav`
   grid-column: -1 / 1;
@@ -17,8 +21,6 @@ const LinkContainer = styled.div`
   align-items: center;
   gap: 1rem;
 `;
-
-// TODO: Snap this into a little drawer at smaller viewports.
 
 export default function GlobalNav() {
   return (
@@ -55,15 +57,98 @@ const StyledMobileGlobalNav = styled(StyledNav)`
   }
 `;
 
-// TODO: Make faBars a dropdown menu that has links.
-
 function MobileGlobalNav() {
   return (
     <StyledMobileGlobalNav>
       <h1>YourFinances</h1>
-      <div>
-        <FontAwesomeIcon icon={faBars} />
-      </div>
+      <MobileDropdown />
     </StyledMobileGlobalNav>
+  );
+}
+
+const StyledMobileDropdown = styled.div`
+  position: relative;
+`;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: var(--accent-200);
+  }
+`;
+
+function MobileDropdown() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  function handleClick() {
+    setIsDropdownOpen((prevState) => !prevState);
+  }
+
+  return (
+    <StyledMobileDropdown>
+      <StyledFontAwesomeIcon icon={faBars} onClick={handleClick} />
+      {isDropdownOpen && <MobileDropdownLinks />}
+    </StyledMobileDropdown>
+  );
+}
+
+const StyledMobileDropDownLinks = styled.ul`
+  position: absolute;
+  border: 1px solid var(--text-800);
+  border-radius: 0.25rem;
+  background-color: var(--background-900);
+  padding: 0.5rem;
+  top: 10;
+  right: 0;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const StyledListItem = styled.li`
+  padding: 0.1rem 0.6rem;
+  border-radius: 0.25rem;
+  transition: background-color 200ms ease-in-out;
+
+  &:hover {
+    background-color: var(--text-800);
+    cursor: pointer;
+  }
+`;
+
+const LinkList = styled.ul`
+  border-bottom: 1px solid var(--text-800);
+  padding-bottom: 0.5rem;
+`;
+
+const ButtonListItem = styled.li`
+  padding: 0.25rem 0;
+`;
+
+function MobileDropdownLinks() {
+  function handleLogoutClick() {
+    console.log('NYI: Logout');
+  }
+
+  return (
+    <StyledMobileDropDownLinks>
+      <LinkList>
+        <StyledListItem>
+          <Link to={'login'}>Login</Link>
+        </StyledListItem>
+        <StyledListItem>App</StyledListItem>
+        <StyledListItem>Register</StyledListItem>
+        <StyledListItem>User</StyledListItem>
+      </LinkList>
+      <ButtonListItem>
+        <LogoutButton onClick={handleLogoutClick}>
+          <FontAwesomeIcon icon={faArrowRightFromBracket} />
+          <div>Logout</div>
+        </LogoutButton>
+      </ButtonListItem>
+    </StyledMobileDropDownLinks>
   );
 }

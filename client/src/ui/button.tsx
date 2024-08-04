@@ -13,8 +13,21 @@ export const Button = styled.button`
   &:hover {
     background-color: var(--accent-500);
   }
+
+  &:active {
+    background-color: var(--accent-700);
+  }
 `;
 
 export const ButtonWithSpacing = styled(Button)`
   letter-spacing: 1px;
+`;
+
+export const LogoutButton = styled(Button)`
+  padding: 0.35rem;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 `;
